@@ -11,7 +11,7 @@
   <!-- IMPORTANT! Id must be unique for your add-in, if you reuse this manifest ensure that you change this id to a new GUID. -->
   <Id>6d79124d-e0a9-449f-b780-ea5c163e375b</Id>
   <!--Version. Updates from the store only get triggered if there is a version change. -->
-  <Version>1.0.0.1</Version>
+  <Version>1.0.0.2</Version>
   <ProviderName>Grunley</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
   <!-- The display name of your add-in. Used on the store and various places of the Office UI such as the add-ins dialog. -->
@@ -19,8 +19,8 @@
   <Description DefaultValue="Present For Grunley"/>
 
   <!-- Icon for your add-in. Used on installation screens and the add-ins dialog. -->
-  <IconUrl DefaultValue="https://localhost:3000/assets/icon-32.png" />
-  <HighResolutionIconUrl DefaultValue="https://localhost:3000/assets/icon-16.png"/>
+  <IconUrl DefaultValue="https://github.com/Ratneshkushwaha/Addins/tree/main/assets/icon-32.png" />
+  <HighResolutionIconUrl DefaultValue="https://github.com/Ratneshkushwaha/Addins/tree/main/assets/icon-16.png"/>
 
   <!--If you plan to submit this add-in to the Office Store, uncomment the SupportUrl element below-->
   <!-- <SupportUrl DefaultValue="[Insert the URL of a page that provides support information for the app]" /> -->
@@ -44,7 +44,7 @@
   <FormSettings>
     <Form xsi:type="ItemRead">
       <DesktopSettings>
-        <SourceLocation DefaultValue="https://localhost:3000/index.html"/>
+        <SourceLocation DefaultValue="https://github.com/Ratneshkushwaha/Addins/index.html"/>
         <RequestedHeight>250</RequestedHeight>
       </DesktopSettings>
     </Form>
@@ -127,13 +127,13 @@
       </Hosts>
       <Resources>
         <bt:Images>
-          <bt:Image id="icon16" DefaultValue="https://localhost:3000/assets/icon-16.png"/>
-          <bt:Image id="icon32" DefaultValue="https://localhost:3000/assets/icon-32.png"/>
-          <bt:Image id="icon80" DefaultValue="https://localhost:3000/assets/icon-80.png"/>
+          <bt:Image id="icon16" DefaultValue="https://github.com/Ratneshkushwaha/Addins/tree/main/assets/icon-16.png"/>
+          <bt:Image id="icon32" DefaultValue="https://github.com/Ratneshkushwaha/Addins/tree/main/assets/icon-32.png"/>
+          <bt:Image id="icon80" DefaultValue="https://github.com/Ratneshkushwaha/Addins/tree/main/assets/icon-80.png"/>
         </bt:Images>
         <bt:Urls>
-          <bt:Url id="functionFile" DefaultValue="https://localhost:3000/function-file/function-file.html"/>
-          <bt:Url id="messageReadTaskPaneUrl" DefaultValue="https://localhost:3000/index.html"/>
+          <bt:Url id="functionFile" DefaultValue="https://github.com/Ratneshkushwaha/Addins/function-file/function-file.html"/>
+          <bt:Url id="messageReadTaskPaneUrl" DefaultValue="https://github.com/Ratneshkushwaha/Addins/index.html"/>
         </bt:Urls>
         <bt:ShortStrings>
           <bt:String id="groupLabel" DefaultValue="My Add-in Group"/>
