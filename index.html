@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OutlookTIM</title>
+  <!-- Office JavaScript API -->
+  <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.debug.js"></script>
+  <!-- LOCAL -->
+  <link rel="stylesheet" href="/node_modules/office-ui-fabric-js/dist/css/fabric.min.css" />
+  <link rel="stylesheet" href="/node_modules/office-ui-fabric-js/dist/css/fabric.components.css" />
+  <!-- CDN -->
+
+  <!-- Template styles -->
+  <link href="app.css" rel="stylesheet" type="text/css" />
+  <script src="https://alcdn.msauth.net/browser/2.26.0/js/msal-browser.js"
+    integrity="sha384-fitpJWrpyl840mvd9nBFLGulqR4BJzvim0fzrXQKdsVh2AQzE4rTTJ0o5o+x+dRK"
+    crossorigin="anonymous"></script>
+  <!--Start bootstrap CDN -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <!-- end bootstrap CDN -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script type="text/javascript">
+    if (typeof Msal === 'undefined') document.write(unescape("%3Cscript src='https://alcdn.msftauth.net/browser/2.26.0/js/msal-browser.js' type='text/javascript' crossorigin='anonymous' %3E%3C/script%3E"));
+  </script>
+  <style type="text/css">
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .w-100 {
+      width: 100%;
+    }
+
+    .border-0 {
+      border: none;
+    }
+
+    .text-dark {
+      color: #333333;
+    }
+
+    .px-12 {
+      padding-left: 12px;
+      padding-right: 12px;
+      padding-top: 12px;
+    }
+
+    .gt-mainwrap {
+      box-sizing: border-box;
+      position: relative;
+      width: 100%;
+      max-width: 380px;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 0;
+      background: #FFFFFF;
+      border: 1px solid #e0e0e0;
+    }
+
+    .gt-mainwrap .heading-bar {
+      position: sticky;
+      top: 0;
+      left: 0;
+      z-index: 111;
+      width: 100%;
+      background-color: #CFD8DC;
+      padding: 8px 12px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+    }
+
+    .gt-mainwrap .heading-bar .heading-txt {
+      font-size: 22px;
+      color: #14213D;
+      margin-bottom: 0;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      margin-top: 0;
+      font-weight: 400;
+      font-family: arial;
+    }
+
+    .gt-mainwrap .heading-bar .close-wrap {
+      margin-left: auto;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+
+    }
+
+    .gt-mainwrap .heading-bar .close-wrap:hover {
+      cursor: pointer;
+      background-color: #f2f2f2;
+    }
+
+    .gt-mainwrap .form-group {
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    .gt-mainwrap .form-group .text-label {
+      display: block;
+      width: 100%;
+      font-size: 15px;
+      font-family: arial;
+      color: #676767;
+      margin-bottom: 4px;
+    }
+
+    .progress-section {
+      padding-bottom: 8px;
+      display: none;
+    }
+
+    .progress-section.show {
+      display: block;
+    }
+
+    .opt-item {
+      display: flex;
+      align-content: center;
+      border-radius: 4px;
+      padding: 4px;
+      margin-bottom: 8px;
+      color: #0277BD;
+      background-color: #f2f2f2;
+    }
+
+    .opt-item .ic-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      min-width: 32px;
+      margin-right: 8px;
+    }
+
+    .opt-item .opt-name {
+      font-size: 16px;
+      font-family: arial;
+      font-weight: 400;
+      display: flex;
+      align-items: center;
+    }
+
+    .opt-item:hover {
+      cursor: pointer;
+      background-color: #e3f2fd;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 0;
+      font-family: arial;
+    }
+
+    .search-box .ic-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 28px;
+      min-width: 32px;
+    }
+
+    .search-box .advance-link {
+      color: #0277BD;
+      padding: 4px 8px;
+      border-radius: 4px;
+      background-color: #f2f2f2;
+      text-decoration: none;
+      font-size: 15px;
+    }
+
+    .search-box .advance-link:hover {
+      cursor: pointer;
+      background-color: #e3f2fd;
+    }
+
+    .search-box .search-txt {
+      font-family: arial;
+      font-weight: 400;
+      display: flex;
+      align-items: center;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .display-flex {
+      display: flex !important;
+    }
+
+    .text-end {
+      text-align: right;
+    }
+
+    .text-end .warning-font {
+      color: #FF0000;
+      font-family: arial;
+      font-size: 14px;
+    }
+
+    .search-result-wrap .search-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 1rem;
+      font-family: arial;
+      font-size: 15px;
+    }
+
+    .search-result-wrap .search-result-box {
+      border-radius: 4px;
+      margin-top: 4px;
+      border: 1px solid #E0E0E0;
+      min-height: 200px;
+      max-height: calc(100vh - 475px);
+      overflow-y: auto;
+    }
+
+    .flex-reverse {
+      display: flex;
+      flex-direction: row-reverse;
+    }
+
+    fluent-data-grid-row.header {
+      border-bottom: none;
+      padding: 0;
+      position: sticky;
+      top: 0;
+    }
+
+    fluent-data-grid-row[row-type="default"]:last-child {
+      border-bottom: 0;
+    }
+
+    fluent-data-grid-cell.column-header {
+      background: #E3F2FD;
+      border-radius: 0;
+    }
+
+    .user-mail {
+      display: block;
+      margin-top: 4px;
+      font-family: arial;
+      font-size: 13px;
+      color: #676767;
+    }
+
+    .search-box .ic-wrap:hover {
+      color: orange;
+    }
+
+    .displayNone {
+      display: none;
+    }
+
+    /*============= custome scrollbar css============*/
+
+    /* width */
+    .search-result-box::-webkit-scrollbar,
+    .gt-mainwrap::-webkit-scrollbar {
+      width: 12px;
+    }
+
+    /* Track */
+    .search-result-box::-webkit-scrollbar-track,
+    .gt-mainwrap::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    /* Handle */
+    .search-result-box::-webkit-scrollbar-thumb,
+    .gt-mainwrap::-webkit-scrollbar-thumb {
+      background: #e0e0e0;
+      border-radius: 8px;
+      border: 4px solid #FFFFFF;
+    }
+
+    /* Handle on hover */
+    .search-result-box::-webkit-scrollbar-thumb:hover,
+    .gt-mainwrap::-webkit-scrollbar-thumb:hover {
+      background: #AAAAAA;
+    }
+  </style>
+</head>
+
+<body class="ms-font-m ms-welcome ms-Fabric">
+  <!-- <main id="app-body" class="ms-welcome__main"> -->
+  <div class="gt-mainwrap">
+    <div class="px-12">
+      <div class="form-group">
+        <label class="text-label">Department</label>
+
+        <fluent-select id="Department" class="w-100" title="Select a section">
+
+        </fluent-select>
+      </div>
+      <div class="form-group">
+        <label class="text-label">Project</label>
+        <fluent-select id="Project" class="w-100" title="Select a section"></fluent-select>
+      </div>
+
+      <div class="progress-section">
+        <fluent-progress id="progessbar" value="0"></fluent-progress>
+      </div>
+
+      <div class="opt-item">
+        <div class="ic-wrap">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-archive"
+            viewBox="0 0 16 16">
+            <path
+              d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1V2zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5H2zm13-3H1v2h14V2zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z" />
+          </svg>
+        </div>
+        <div class="opt-name" id="btnArchive">Archive (Selected Email)</div>
+      </div>
+
+      <div class="opt-item">
+        <div class="ic-wrap">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-share"
+            viewBox="0 0 16 16">
+            <path
+              d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z" />
+          </svg>
+        </div>
+        <div class="opt-name" id="shareLageFile">Share Large Files (Project OneDrive)</div>
+      </div>
+      <div class="search-box">
+        <div class="display-flex text-dark">
+          <div class="ic-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
+              viewBox="0 0 16 16">
+              <path
+                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+            </svg>
+          </div>
+          <div id="btnsearchText" class="search-txt">Search</div>
+        </div>
+        <div>
+          <div onclick="btnAdvanceClick();" class="advance-link">Advance Search</div>
+        </div>
+      </div>
+      <div class="search-input-wrap">
+        <fluent-text-field id="searchText" appearance="outline" class="w-100"
+          placeholder="Search here"></fluent-text-field>
+        <div class="text-end">
+          <span id="errMsg" class="warning-font"></span>
+        </div>
+      </div>
+      <div class="search-result-wrap">
+        <div class="search-heading">
+          <div>Search result</div>
+          <div>
+            <fluent-checkbox id="chkArchive" class="flex-reverse">Achived by you</fluent-checkbox>
+          </div>
+        </div>
+        <div class="search-result-box">
+          <!-- <table id="defaultGrid" class="table table-striped">
+            <thead>
+              <tr>
+                <th>From</th>
+                <th>EmailDateTime</th>
+              </tr>
+            </thead>
+            <tbody id="bindData">
+
+            </tbody>
+          </table> -->
+          <ul class="ms-List" id="itemData"></ul>
+        </div>
+      </div>
+      <div id="Email" class="user-mail"></div>
+    </div>
+    <div id="selected-items"></div>
+
+    <!-- </main> -->
+	<script src="https://alcdn.msauth.net/browser/2.1.0/js/msal-browser.min.js"
+    integrity="sha384-EmYPwkfj+VVmL1brMS1h6jUztl4QMS8Qq8xlZNgIT/luzg7MAzDVrRa2JxbNmk/e"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@microsoft/microsoft-graph-client/lib/graph-js-sdk.js"></script>
+
+
+    <script type="text/javascript" src="/node_modules/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="/node_modules/office-ui-fabric-js/dist/js/fabric.js"></script>
+    <script type="module" src="https://unpkg.com/@fluentui/web-components"></script>
+
+    <link href="/src/index.js" type="text/javascript" />
+    <script type="text/javascript">
+      // document.getElementById("defaultGrid").rowsData = [
+      //     { From: "power@autoreplay.com", Datetime: "8/12/22 09:43 AM" },
+      //     { From: "do-not-replay@pe.com", Datetime: "8/12/22 09:43 AM" },
+      //     { From: "power@autoreplay.com", Datetime: "8/12/22 09:43 AM" },
+      //     { From: "power@autoreplay.com", Datetime: "8/12/22 09:43 AM" },
+      //     { From: "power@autoreplay.com", Datetime: "8/12/22 09:43 AM" },
+      //     { From: "power@autoreplay.com", Datetime: "8/12/22 09:43 AM" },
+      //     { From: "power@autoreplay.com", Datetime: "8/12/22 09:43 AM" },
+      //     { From: "power@autoreplay.com", Datetime: "8/12/22 09:43 AM" },
+      // ]; 
+      // let data = $("#defaultGrid")[0]._rowsData;
+      // console.log(data);
+      // if (data.length > 0) {
+
+      // } else {
+      //   var SpinnerElements = document.querySelectorAll(".ms-Spinner");
+      //   for (var i = 0; i < SpinnerElements.length; i++) {
+      //     new fabric['Spinner'](SpinnerElements[i]);
+      //   }
+	  // }
+	  
+      var ProgressIndicatorElements = document.querySelectorAll(".ms-ProgressIndicator");
+      for (var i = 0; i < ProgressIndicatorElements.length; i++) {
+        let ProgressIndicator = new fabric['ProgressIndicator'](ProgressIndicatorElements[i]);
+        setTimeout(function () {
+          ProgressIndicator.setProgressPercent(1);
+        }, 2000);
+      }
+
+      // var ListItemElements = document.querySelectorAll(".ms-List");
+      // for (var i = 0; i < ListItemElements.length; i++) {
+      //   new fabric['ms-ListItem'](ListItemElements[i]);
+      // }
+      function btnAdvanceClick(params) {
+        window.open(`https://grunley.sharepoint.com/SitePages/AdvanceSearch.aspx`);
+      }
+    </script>
+</body>
+
+</html>
